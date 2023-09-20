@@ -26,6 +26,7 @@ public class Pharmacist
   private Long id;
   private String categoryAvailable;
   private String categoryDuration;
+  private String experience;
   private String city;
   private String location;
   private String universityName;
