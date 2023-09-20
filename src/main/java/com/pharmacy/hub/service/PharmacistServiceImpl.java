@@ -48,8 +48,7 @@ public class PharmacistServiceImpl implements PharmacistService
   @Transactional(readOnly = true)
   public List<Pharmacist> findAll()
   {
-    log.debug("Request to get all Pharmacist");
-    return null;
+    return pharmacistRepository.findAll();
   }
 
   @Override
@@ -65,6 +64,12 @@ public class PharmacistServiceImpl implements PharmacistService
   {
     log.debug("Request to delete Pharmacist : {}", id);
     pharmacistRepository.deleteById(id);
+  }
+
+  @Override
+  public Pharmacist createPharmacist(Pharmacist pharmacist)
+  {
+    return pharmacistRepository.save(pharmacist);
   }
 
 }
