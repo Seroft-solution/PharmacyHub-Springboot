@@ -1,5 +1,6 @@
 package com.pharmacy.hub.service;
 
+import com.pharmacy.hub.dto.UserDTO;
 import com.pharmacy.hub.entity.Pharmacist;
 import com.pharmacy.hub.entity.Proprietor;
 import com.pharmacy.hub.entity.User;
@@ -52,6 +53,19 @@ public class UserServiceImpl implements UserService
   public List<User> findAll()
   {
     return userRepository.findAll();
+  }
+
+  @Override
+  public User validateLogin(UserDTO userDTO)
+  {
+    if(userDTO.getPassword().isEmpty())
+    {
+      return userRepository.findByEmailAddress(userDTO.getEmailAddress());
+    }
+    else
+    {
+      return userRepository.findByEmailAddressAndPassword(userDTO.getEmailAddress(), userDTO.getPassword());
+    }
   }
 
 

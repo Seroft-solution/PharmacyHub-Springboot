@@ -1,5 +1,6 @@
 package com.pharmacy.hub.controller;
 
+import com.pharmacy.hub.dto.UserDTO;
 import com.pharmacy.hub.entity.Pharmacist;
 import com.pharmacy.hub.entity.User;
 import com.pharmacy.hub.service.UserService;
@@ -24,6 +25,21 @@ public class UserController
   public ResponseEntity<User> addUser(@RequestBody User user)
   {
     return new ResponseEntity<User>(userService.createUser(user), HttpStatus.OK);
+  }
+
+  @PostMapping("/googleauth/login")
+  public ResponseEntity<User> googleLogin(@RequestBody UserDTO userDTO)
+  {
+    User user = userService.validateLogin(userDTO);
+
+    return new ResponseEntity<User>(user, HttpStatus.OK);
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<User> userLogin(@RequestBody UserDTO userDTO)
+  {
+    User user = userService.validateLogin(userDTO);
+    return new ResponseEntity<User>(user, HttpStatus.OK);
   }
 
   @GetMapping("/user")
